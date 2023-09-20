@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorDto> handleBusinessException(
             final BusinessException e) {
         log.error("[ERROR] BusinessException -> {}", e.getMessage());
-        return ResponseEntity.status(e.getStatus())
+        return ResponseEntity.status(e.getErrorType().getStatus())
                 .body(new ErrorDto(e.getMessage(), e.getCause().toString()));
     }
 

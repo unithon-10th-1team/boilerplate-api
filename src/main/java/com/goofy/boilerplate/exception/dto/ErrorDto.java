@@ -14,8 +14,8 @@ public class ErrorDto implements Serializable {
         this.reason = reason;
     }
 
-    public ErrorDto(ErrorMessage message) {
+    public ErrorDto(ErrorType message) {
         this.message = message.name();
-        this.reason = message.getDescription();
+        this.reason = message.getMessage();
     }
 }

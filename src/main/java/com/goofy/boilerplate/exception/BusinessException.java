@@ -1,30 +1,41 @@
 package com.goofy.boilerplate.exception;
 
-import com.goofy.boilerplate.exception.dto.ErrorMessage;
+import com.goofy.boilerplate.exception.dto.ErrorType;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
-public abstract class BusinessException extends RuntimeException {
-    private final HttpStatus status;
+public class BusinessException extends RuntimeException {
+    private ErrorType errorType;
+    private String customMessage;
+    private String[] args;
+    private Object data;
 
-    public BusinessException(String message, HttpStatus status) {
-        super(message);
-        this.status = status;
+    public BusinessException(ErrorType errorType) {
+        super(errorType.getMessage());
+        this.errorType = errorType;
     }
 
-    public BusinessException(Throwable cause, HttpStatus status) {
-        super(cause);
-        this.status = status;
+    public BusinessException(ErrorType errorType, String customMessage) {
+        super(errorType.getMessage());
+        this.errorType = errorType;
+        this.customMessage = customMessage;
     }
 
-    public BusinessException(String message, Throwable cause, HttpStatus status) {
-        super(message, cause);
-        this.status = status;
+    public BusinessException(ErrorType errorType, Object data, String... args) {
+        super(errorType.getMessage());
+        this.data = data;
+        this.args = args;
+        this.errorType = errorType;
     }
 
-    public BusinessException(ErrorMessage message, HttpStatus status) {
-        super(message.getDescription());
-        this.status = status;
+    public BusinessException(ErrorType errorType, Throwable t) {
+        super(t);
+        this.errorType = errorType;
+    }
+
+    public BusinessException(ErrorType errorType, Throwable t, String customMessage) {
+        super(t);
+        this.errorType = errorType;
+        this.customMessage = customMessage;
     }
 }
