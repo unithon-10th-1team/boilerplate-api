@@ -3,23 +3,44 @@ package com.goofy.boilerplate.common.helper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class EnvironmentHelper {
     private final Environment environment;
 
-    public boolean isLocalProfile() {
-        return Arrays.asList(environment.getActiveProfiles()).contains("local");
+    private final String PROD = "prod";
+    private final String DEV = "dev";
+    private final String LOCAL = "local";
+
+    private final List<String> PROD_AND_DEV = List.of(PROD, DEV);
+
+    public String getCurrentProfile() {
+        if (isProdProfile()) return PROD;
+        if (isDevProfile()) return DEV;
+        return LOCAL;
     }
 
-    public boolean isTestProfile() {
-        return Arrays.asList(environment.getActiveProfiles()).contains("test");
+    public Boolean isProdProfile() {
+        String[] activeProfiles = environment.getActiveProfiles();
+        List<String> currentProfile = Arrays.stream(activeProfiles).collect(Collectors.toList());
+        return currentProfile.contains(PROD);
     }
 
-    public boolean isLocalTestProfile() {
-        return isTestProfile() || isLocalProfile();
+    public Boolean isDevProfile() {
+        String[] activeProfiles = environment.getActiveProfiles();
+        List<String> currentProfile = Arrays.stream(activeProfiles).collect(Collectors.toList());
+        return currentProfile.contains(DEV);
+    }
+
+    public Boolean isProdAndDevProfile() {
+        String[] activeProfiles = environment.getActiveProfiles();
+        List<String> currentProfile = Arrays.stream(activeProfiles).collect(Collectors.toList());
+        return CollectionUtils.containsAny(PROD_AND_DEV, currentProfile);
     }
 }
