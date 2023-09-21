@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.15'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.diffplug.spotless' version '6.11.0'
 }
 
 group = 'com.goofy'
@@ -45,4 +46,16 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        target("**/*.java")
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+        importOrder()
+        indentWithTabs()
+        googleJavaFormat().aosp()
+    }
 }
