@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    protected ResponseEntity<ErrorDto> handleBusinessException(
-            final BusinessException e) {
+    protected ResponseEntity<ErrorDto> handleBusinessException(final BusinessException e) {
         log.error("[ERROR] BusinessException -> {}", e.getMessage());
         return ResponseEntity.status(e.getErrorType().getStatus())
                 .body(new ErrorDto(e.getMessage(), e.getCause().toString()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
+    protected ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(
+            final MethodArgumentNotValidException e) {
         log.error("[ERROR] MethodArgumentNotValidException -> {}", e.getBindingResult());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorDto(e.getMessage(), e.getMessage()));

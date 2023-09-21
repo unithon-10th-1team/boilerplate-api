@@ -1,11 +1,10 @@
 package com.goofy.boilerplate.common.model.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,13 +16,13 @@ public class PageableResponseDto<T> {
     private long totalCount;
 
     public static <T> ResponseEntity<ResponseDto<PageableResponseDto<T>>> ok(Page<T> data) {
-        var pageData = new PageableResponseDto<T>(
-                data.getContent(),
-                data.getPageable().getPageNumber(),
-                data.getSize(),
-                data.getTotalPages(),
-                data.getTotalElements()
-        );
+        var pageData =
+                new PageableResponseDto<T>(
+                        data.getContent(),
+                        data.getPageable().getPageNumber(),
+                        data.getSize(),
+                        data.getTotalPages(),
+                        data.getTotalElements());
 
         return ResponseDto.ok(pageData);
     }

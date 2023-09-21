@@ -1,10 +1,9 @@
 package com.goofy.boilerplate.common.model.converter;
 
 import com.goofy.boilerplate.common.utils.MapperUtil;
-
+import java.util.Map;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.util.Map;
 
 @Converter
 public class MapConverter implements AttributeConverter<Map<String, Object>, String> {

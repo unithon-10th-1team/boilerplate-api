@@ -1,8 +1,7 @@
 package com.goofy.boilerplate.exception.dto;
 
-import lombok.Getter;
-
 import java.io.Serializable;
+import lombok.Getter;
 
 @Getter
 public class ErrorDto implements Serializable {
