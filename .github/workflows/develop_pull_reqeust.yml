@@ -1,4 +1,4 @@
-name: develop(pull_request) Spotless And Test
+name: develop(pull_request) Spotless, Test and SonarCloud
 on:
   pull_request:
     branches:
@@ -19,6 +19,13 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'adopt'
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -32,5 +39,8 @@ jobs:
       - name: spotless check
         run: ./gradlew spotlessCheck --no-daemon
 
-      - name: test
-        run: ./gradlew test
+      - name: test and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew test sonar --info --stacktrace --no-daemon
