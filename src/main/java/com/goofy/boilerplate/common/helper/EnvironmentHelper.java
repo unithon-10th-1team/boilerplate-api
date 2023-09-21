@@ -1,5 +1,7 @@
 package com.goofy.boilerplate.common.helper;
 
+import static com.goofy.boilerplate.common.consts.Static.*;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -13,10 +15,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EnvironmentHelper {
     private final Environment environment;
-
-    private final String PROD = "prod";
-    private final String DEV = "dev";
-    private final String LOCAL = "local";
 
     private final List<String> PROD_AND_DEV = List.of(PROD, DEV);
 
