@@ -18,7 +18,7 @@ public class Static {
     public static final int INTERNAL_SERVER = 500;
     public static final int SERVICE_UNAVAILABLE = 503;
 
-    public static final String PROD_SERVER_URL = "https://example.com";
+    public static final String PROD_SERVER_URL = "http://3.39.135.242:8080/";
     public static final String DEV_SERVER_URL = "http://localhost:8080";
     public static final String LOCAL_SERVER_URL = "http://localhost:8080";
     public static final String IMAGE_DOMAIN = "https://image.example.com";
