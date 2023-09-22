@@ -1,5 +1,14 @@
 package com.flickspick.config.web;
 
+import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
+import static com.flickspick.common.consts.Static.DEV;
+import static com.flickspick.common.consts.Static.DEV_SERVER_URL;
+import static com.flickspick.common.consts.Static.GITHUB_URL;
+import static com.flickspick.common.consts.Static.LOCAL_SERVER_URL;
+import static com.flickspick.common.consts.Static.PROD;
+import static com.flickspick.common.consts.Static.PROD_SERVER_URL;
+import static com.flickspick.common.consts.Static.SERVER_NAME;
+
 import com.flickspick.auth.model.AuthUser;
 import com.flickspick.common.helper.EnvironmentHelper;
 import io.swagger.v3.oas.models.Components;
@@ -9,22 +18,12 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-
-import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
-import static com.flickspick.common.consts.Static.DEV;
-import static com.flickspick.common.consts.Static.DEV_SERVER_URL;
-import static com.flickspick.common.consts.Static.GITHUB_URL;
-import static com.flickspick.common.consts.Static.LOCAL_SERVER_URL;
-import static com.flickspick.common.consts.Static.PROD;
-import static com.flickspick.common.consts.Static.PROD_SERVER_URL;
-import static com.flickspick.common.consts.Static.SERVER_NAME;
 
 @Configuration
 @RequiredArgsConstructor
@@ -40,13 +39,16 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .servers(swaggerServers())
-                .components(new Components().addSecuritySchemes(AUTH_TOKEN_HEADER_KEY,
-                        new SecurityScheme()
-                                .type(SecurityScheme.Type.APIKEY)
-                                .in(SecurityScheme.In.HEADER)
-                                .name(AUTH_TOKEN_HEADER_KEY)
-                                .description("인증이 필요한 경우 ex) X-FP-AUTH-TOKEN xxxxxxx")
-                ))
+                .components(
+                        new Components()
+                                .addSecuritySchemes(
+                                        AUTH_TOKEN_HEADER_KEY,
+                                        new SecurityScheme()
+                                                .type(SecurityScheme.Type.APIKEY)
+                                                .in(SecurityScheme.In.HEADER)
+                                                .name(AUTH_TOKEN_HEADER_KEY)
+                                                .description(
+                                                        "인증이 필요한 경우 ex) X-FP-AUTH-TOKEN xxxxxxx")))
                 .security(List.of(new SecurityRequirement().addList(AUTH_TOKEN_HEADER_KEY)))
                 .info(swaggerInfo());
     }

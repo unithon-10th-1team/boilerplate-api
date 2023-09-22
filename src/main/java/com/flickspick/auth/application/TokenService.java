@@ -1,5 +1,7 @@
 package com.flickspick.auth.application;
 
+import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
+
 import com.flickspick.auth.model.AuthToken;
 import com.flickspick.auth.model.AuthUser;
 import com.flickspick.auth.model.AuthUserImpl;
@@ -10,21 +12,19 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-
-import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class TokenService {
-    // private final long accessTokenValidMillisecond = 1000L * 60 * 100000; // AccessToken 30초 토큰 유효
+    // private final long accessTokenValidMillisecond = 1000L * 60 * 100000; // AccessToken 30초 토큰
+    // 유효
     private final UserRepository userRepository;
     private String key;
 
@@ -62,7 +62,11 @@ public class TokenService {
     public AuthUser getAuthUser(AuthToken token) {
         verifyToken(token.getToken());
         var id = getUserIdFromToken(token.getToken());
-        var user = userRepository.findById(id).orElseThrow(() -> new AuthorizationException(ErrorType.AUTHORIZATION_ERROR));
+        var user =
+                userRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new AuthorizationException(ErrorType.AUTHORIZATION_ERROR));
         return new AuthUserImpl(id);
     }
 

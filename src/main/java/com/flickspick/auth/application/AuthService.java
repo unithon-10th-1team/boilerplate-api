@@ -15,10 +15,10 @@ public class AuthService {
     private final TokenService tokenService;
 
     public AuthLoginResponse login(AuthLoginRequest request) {
-        var user = userRepository.findByUsernameAndPassword(
-                request.getUsername(),
-                request.getPassword()
-        ).orElseThrow(() -> new AuthLoginException(ErrorType.FAIL_TO_LOGIN_ERROR));
+        var user =
+                userRepository
+                        .findByUsernameAndPassword(request.getUsername(), request.getPassword())
+                        .orElseThrow(() -> new AuthLoginException(ErrorType.FAIL_TO_LOGIN_ERROR));
 
         var token = tokenService.jwtBuilder(user.getId(), user.getNickname());
 

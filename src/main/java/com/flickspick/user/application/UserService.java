@@ -27,11 +27,12 @@ public class UserService {
             throw new UserSignInvalidException(ErrorType.DUPLICATION_NICKNAME_ERROR);
         }
 
-        var user = User.builder()
-                .username(request.getUsername())
-                .nickname(request.getNickname())
-                .password(request.getPassword())
-                .build();
+        var user =
+                User.builder()
+                        .username(request.getUsername())
+                        .nickname(request.getNickname())
+                        .password(request.getPassword())
+                        .build();
 
         var savedUser = userRepository.save(user);
 
