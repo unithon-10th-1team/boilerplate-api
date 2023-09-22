@@ -1,8 +1,8 @@
-name: develop(pull_request) Spotless, Test and SonarCloud
+name: main(pull_request) Spotless, Test and SonarCloud
 on:
   pull_request:
     branches:
-      - develop
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
