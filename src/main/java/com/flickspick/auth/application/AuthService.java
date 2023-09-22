@@ -2,6 +2,8 @@ package com.flickspick.auth.application;
 
 import com.flickspick.auth.dto.request.AuthLoginRequest;
 import com.flickspick.auth.dto.response.AuthLoginResponse;
+import com.flickspick.exception.AuthLoginException;
+import com.flickspick.exception.dto.ErrorType;
 import com.flickspick.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class AuthService {
         var user = userRepository.findByUsernameAndPassword(
                 request.getUsername(),
                 request.getPassword()
-        ).orElseThrow(() -> new RuntimeException());
+        ).orElseThrow(() -> new AuthLoginException(ErrorType.FAIL_TO_LOGIN_ERROR));
 
         var token = tokenService.jwtBuilder(user.getId(), user.getNickname());
 

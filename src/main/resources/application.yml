@@ -29,3 +29,7 @@ server:
     accept-count: 50
     uri-encoding: UTF-8
   forward-headers-strategy: framework
+
+jwt:
+  secret:
+    key:${JWT_SECRET_KEY}

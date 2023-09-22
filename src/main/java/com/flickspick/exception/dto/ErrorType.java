@@ -13,6 +13,8 @@ public enum ErrorType {
 
     DUPLICATION_USERNAME_ERROR(HttpStatus.BAD_REQUEST, "중복된 Id 입니다."),
     DUPLICATION_NICKNAME_ERROR(HttpStatus.BAD_REQUEST, "중복된 닉네임 입니다."),
+    FAIL_TO_LOGIN_ERROR(HttpStatus.UNAUTHORIZED, "로그인을 실패했습니다."),
+    AUTHORIZATION_ERROR(HttpStatus.UNAUTHORIZED, "인증, 인가 오류"),
     ;
 
     private final HttpStatus status;
