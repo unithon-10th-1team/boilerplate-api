@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<?> sign(@RequestBody UserSignRequest request) {

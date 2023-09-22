@@ -27,16 +27,14 @@ public class UserService {
             throw new UserSignInvalidException(ErrorType.DUPLICATION_NICKNAME_ERROR);
         }
 
-        var savedUser =
-                userRepository.save(
-                        User.builder()
-                                .username(request.getUsername())
-                                .nickname(request.getNickname())
-                                .password(request.getPassword())
-                                .build());
+        var user = User.builder()
+                .username(request.getUsername())
+                .nickname(request.getNickname())
+                .password(request.getPassword())
+                .build();
 
-        var token = tokenService.jwtBuilder(savedUser.getId(), savedUser.getNickname());
+        var savedUser = userRepository.save(user);
 
-        return new UserSignResponse(savedUser.getNickname(), token);
+        return new UserSignResponse(savedUser.getId(), savedUser.getNickname());
     }
 }

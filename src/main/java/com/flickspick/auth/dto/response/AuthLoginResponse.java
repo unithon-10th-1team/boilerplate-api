@@ -1,11 +1,11 @@
-package com.flickspick.user.dto.response;
+package com.flickspick.auth.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserSignResponse {
-    private Long id;
+public class AuthLoginResponse {
     private String nickname;
+    private String token;
 }
