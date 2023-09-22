@@ -23,6 +23,8 @@ repositories {
     mavenCentral()
 }
 
+jar.enabled = false
+
 dependencies {
     // spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
