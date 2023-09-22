@@ -1,8 +1,8 @@
 package com.flickspick.auth.model;
 
-import lombok.Data;
-
 import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
+
+import lombok.Data;
 
 @Data
 public class AuthToken {
