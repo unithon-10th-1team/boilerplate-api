@@ -34,8 +34,8 @@ public class ShareService {
 
         RecTypeModel recTypeModel = recommendTypeService.getRecTypeModel(userMovieHistory.getRecommendTypeId());
 
-        List<MovieModel> similarMovies = movieService.getMovieModelList(userMovieHistory.getMovieId(), 2);
-        MovieModel movieModel = movieService.getMovieModel(userMovieHistory.getMovieId());
+        List<MovieModel> similarMovies = movieService.getList(userMovieHistory.getMovieId(), 2);
+        MovieModel movieModel = movieService.get(userMovieHistory.getMovieId());
         similarMovies.add(movieModel);
 
         return new ShareResponse(

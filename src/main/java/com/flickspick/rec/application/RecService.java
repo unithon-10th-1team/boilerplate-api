@@ -52,13 +52,11 @@ public class RecService {
 
         RecTypeModel recTypeModel = recommendTypeService.get(recommendTypeId);
 
-        var movieModelCf = movieService.asyncGetMovieModel(movieId);
-        var recMoviesCf = movieService.asyncGetMovieModelList(movieId, 3);
-
-        CompletableFuture.allOf(movieModelCf, recMoviesCf).join();
+        var movieModel = movieService.get(movieId);
+        var recMovies = movieService.getList(movieId, 3);
 
         userMovieHistoryService.saveUserMovieHistory(userMovieHistory);
 
-        return RecResponse.toResponse(recTypeModel, movieModelCf.get(), recMoviesCf.get());
+        return RecResponse.toResponse(recTypeModel, movieModel, recMovies);
     }
 }

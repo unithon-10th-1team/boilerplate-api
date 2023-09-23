@@ -41,11 +41,11 @@ public class HomeService {
 
         List<String> tags = recTypeModel.getTags();
 
-        List<MovieModel> similarMovies = movieService.getMovieModelList(userMovieHistory.getMovieId(), 2);
-        MovieModel movieModel = movieService.getMovieModel(userMovieHistory.getMovieId());
+        List<MovieModel> similarMovies = movieService.getList(userMovieHistory.getMovieId(), 2);
+        MovieModel movieModel = movieService.get(userMovieHistory.getMovieId());
         similarMovies.add(movieModel);
 
-        List<MovieModel> differentMovies = movieService.getMovieModelList(userMovieHistory.getMovieId(), 3);
+        List<MovieModel> differentMovies = movieService.getList(userMovieHistory.getMovieId(), 3);
 
         return MyHomeResponse.toResponse(userModel, List.of(recTypeModel), tags, similarMovies, differentMovies);
     }
@@ -58,8 +58,8 @@ public class HomeService {
 
         List<String> tags = recTypeModel.getTags();
 
-        List<MovieModel> similarMovies = movieService.getMovieModelList(userMovieHistory.getMovieId(), 2);
-        MovieModel movieModel = movieService.getMovieModel(userMovieHistory.getMovieId());
+        List<MovieModel> similarMovies = movieService.getList(userMovieHistory.getMovieId(), 2);
+        MovieModel movieModel = movieService.get(userMovieHistory.getMovieId());
         similarMovies.add(movieModel);
 
         List<OttModel> ottModelList = ottService.findAllByUid(userModel.getId())
