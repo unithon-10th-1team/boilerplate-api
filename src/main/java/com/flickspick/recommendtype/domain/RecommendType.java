@@ -1,5 +1,8 @@
-package com.flickspick.character.domain;
+package com.flickspick.recommendtype.domain;
 
+import java.util.List;
+
+import com.flickspick.common.model.converter.StringArrayConverter;
 import com.flickspick.common.model.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -20,12 +23,15 @@ import javax.persistence.Id;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Character extends BaseEntity {
+public class RecommendType extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String characterName;
+    private String recommendType;
 
-    private String tags;
+    @Convert(converter = StringArrayConverter.class)
+    private List<String> tags;
+
+    private String imageUrl;
 }

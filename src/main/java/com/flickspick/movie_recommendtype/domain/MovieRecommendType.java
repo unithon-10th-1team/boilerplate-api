@@ -1,4 +1,4 @@
-package com.flickspick.movie_character.domain;
+package com.flickspick.movie_recommendtype.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class MovieCharacter extends BaseEntity {
+public class MovieRecommendType extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
