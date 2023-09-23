@@ -24,7 +24,7 @@ public class RecController {
     @Operation(summary = "질의 기반 추천 데이터 조회")
     @PostMapping("/query")
     public ResponseEntity<?> query(AuthUser user, @RequestBody RecRequest request) {
-        var response = recService.getV2(user, request);
+        var response = recService.get(user, request);
         return ResponseDto.ok(response);
     }
 }

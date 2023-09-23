@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     private final HomeService homeService;
 
-    @Operation(summary = "[mock] 홈페이지")
+    @Operation(summary = "홈페이지")
     @GetMapping(path = "/api/v1/home")
     public ResponseEntity<?> getHome(AuthUser user) {
         var response = homeService.getHome(user);

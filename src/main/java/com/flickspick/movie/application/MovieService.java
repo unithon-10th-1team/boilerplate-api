@@ -25,13 +25,13 @@ public class MovieService {
 		return MovieModel.toModel(movie);
 	}
 
-	public List<MovieModel> getMovieModelList(Long movieId) {
+	public List<MovieModel> getMovieModelList(Long movieId, int count) {
 		List<Movie> movieList = movieRepository.findAll()
 				.stream().filter(movie -> movie.getId() != movieId)
 				.collect(Collectors.toList());
 		Collections.shuffle(movieList);
 
-		int limit = Math.min(movieList.size(), 3);
+		int limit = Math.min(movieList.size(), count);
 		return movieList.subList(0, limit).stream().map(
 				movie -> MovieModel.toModel(movie)
 		).collect(Collectors.toList());

@@ -24,7 +24,10 @@ public enum ErrorType {
     MOVIE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 정보를 찾을 수 없습니다."),
 
     //movieRecommendType
-    MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 타입 매핑 정보를 찾을 수 없습니다.");
+    MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 타입 매핑 정보를 찾을 수 없습니다."),
+
+    //userMovieHistory
+    USER_MOVIE_HISTORY_NOT_FOUND(HttpStatus.NOT_FOUND, "유저 영화 히스토리를 찾을 수 없습니다."),
 
 
     ;

@@ -17,4 +17,8 @@ public class MyHomeResponse {
     private List<String> tags;
     private List<MovieModel> similarMovies;
     private List<MovieModel> differentMovies;
+
+    public static MyHomeResponse toResponse(UserModel user, List<RecTypeModel> recType, List<String> tags, List<MovieModel> similarMovies, List<MovieModel> differentMovies) {
+        return new MyHomeResponse(user, recType, tags, similarMovies, differentMovies);
+    }
 }
