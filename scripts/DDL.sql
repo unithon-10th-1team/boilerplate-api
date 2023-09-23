@@ -56,3 +56,13 @@ CREATE TABLE `movie`
     `modified_at` datetime     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='영화';
+
+CREATE TABLE `ott_user`
+(
+    `id`          bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `uid`         int    NOT NULL COMMENT '질문',
+    `ott_id`      int    NOT NULL COMMENT 'ott id',
+    `created_at`  datetime DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
+    `modified_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='질문 응답';
