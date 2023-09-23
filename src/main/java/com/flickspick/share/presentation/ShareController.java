@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShareController {
     private final ShareService shareService;
 
-    @Operation(summary = "[mock] 공유하기")
+    @Operation(summary = "공유하기")
     @GetMapping
     public ResponseEntity<?> share(AuthUser authUser) {
         var response = shareService.share(authUser);
