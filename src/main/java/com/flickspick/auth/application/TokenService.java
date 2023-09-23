@@ -1,7 +1,5 @@
 package com.flickspick.auth.application;
 
-import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
-
 import com.flickspick.auth.model.AuthToken;
 import com.flickspick.auth.model.AuthUser;
 import com.flickspick.auth.model.AuthUserImpl;
@@ -12,12 +10,15 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.Date;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+
+import static com.flickspick.auth.AuthConstants.AUTH_TOKEN_HEADER_KEY;
 
 @Slf4j
 @Component
@@ -49,13 +50,13 @@ public class TokenService {
             Jws<Claims> claims = Jwts.parser().setSigningKey(key.getBytes()).parseClaimsJws(token);
         } catch (Exception e) {
             if (e.getMessage().contains("JWT expired")) {
-                throw new RuntimeException();
+                throw new AuthorizationException(ErrorType.AUTHORIZATION_ERROR);
             }
-            throw new RuntimeException();
+            throw new AuthorizationException(ErrorType.AUTHORIZATION_ERROR);
         }
         Long uid = getUserIdFromToken(token);
         if (!userRepository.existsById(uid)) {
-            throw new RuntimeException();
+            throw new AuthorizationException(ErrorType.AUTHORIZATION_ERROR);
         }
     }
 
