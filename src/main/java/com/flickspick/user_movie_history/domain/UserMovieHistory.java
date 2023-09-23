@@ -1,4 +1,4 @@
-package com.flickspick.movie_result.domain;
+package com.flickspick.user_movie_history.domain;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.flickspick.common.model.converter.MapConverter;
-import com.flickspick.common.model.converter.StringArrayConverter;
 import com.flickspick.common.model.entity.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class MovieResult extends BaseEntity {
+public class UserMovieHistory extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

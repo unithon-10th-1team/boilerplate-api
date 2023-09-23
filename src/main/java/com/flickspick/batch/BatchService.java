@@ -3,7 +3,6 @@ package com.flickspick.batch;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.flickspick.client.chatgpt.ChatGPTClient;
@@ -13,8 +12,9 @@ import com.flickspick.movie.domain.Movie;
 import com.flickspick.movie.infrastructure.MovieRepository;
 import com.flickspick.movie_recommendtype.domain.MovieRecommendType;
 import com.flickspick.movie_recommendtype.infrastructure.MovieRecommendTypeRepository;
-import com.flickspick.movie_result.domain.MovieResult;
-import com.flickspick.movie_result.infrastructure.MovieResultRepository;
+import com.flickspick.user_movie_history.domain.MovieResult;
+import com.flickspick.user_movie_history.domain.UserMovieHistory;
+import com.flickspick.user_movie_history.infrastructure.UserMovieHistoryRepository;
 import com.flickspick.ott.domain.Ott;
 import com.flickspick.ott.infrastructure.OttRepository;
 import com.flickspick.question.domain.Question;
@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class BatchService {
-	private final MovieResultRepository movieResultRepository;
+	private final UserMovieHistoryRepository userMovieHistoryRepository;
 	private final MovieRecommendTypeRepository movieRecommendTypeRepository;
 	private final RecommendTypeRepository recommendTypeRepository;
 	private final MovieRepository movieRepository;
@@ -66,17 +66,17 @@ public class BatchService {
 								.recommendTypeId(recommendType.getId())
 								.build();
 						movieRepository.save(movie);
-						MovieResult movieResult = movieResultRepository.findByRecommendTypeIdAndMovieId(
+						UserMovieHistory userMovieHistory = userMovieHistoryRepository.findByRecommendTypeIdAndMovieId(
 										recommendType.getId(), movie.getId())
 								.orElseGet(() -> {
-									MovieResult newMovieResult = MovieResult.builder()
+									UserMovieHistory newMovieResult = UserMovieHistory.builder()
 											.recommendTypeId(recommendType.getId())
 											.movieId(movie.getId())
 											.build();
-									return movieResultRepository.save(newMovieResult);
+									return userMovieHistoryRepository.save(newMovieResult);
 								});
-						movieResult.addQuestionAndAnswer(question.getId(), questionAnswer.getId());
-						movieResultRepository.save(movieResult);
+						userMovieHistory.addQuestionAndAnswer(question.getId(), questionAnswer.getId());
+						userMovieHistoryRepository.save(userMovieHistory);
 
 						MovieRecommendType movieRecommendType = MovieRecommendType.builder()
 								.recommendTypeId(recommendType.getId())
