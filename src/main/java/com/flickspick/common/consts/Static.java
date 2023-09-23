@@ -27,8 +27,9 @@ public class Static {
     public static final String DEV = "dev";
     public static final String LOCAL = "local";
 
-    public static final String GITHUB_URL = "https://github.com/unithon-10th-1team/boilerplate-api";
-    public static final String SERVER_NAME = "boilerplate-api";
+    public static final String GITHUB_URL =
+            "https://github.com/unithon-10th-1team/flicks-pick-server";
+    public static final String SERVER_NAME = "flicks-pick-server";
 
     public static final String[] SwaggerPatterns = {
         "/swagger-resources/**", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs",
