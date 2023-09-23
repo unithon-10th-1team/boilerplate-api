@@ -46,7 +46,7 @@ public class OttService {
         );
     }
 
-    public List<OttUser> findAll(List<Long> ids) {
-        return ottUserRepository.findAllById(ids);
+    public List<OttUser> findAllByUid(Long uid) {
+        return ottUserRepository.findAllByUid(uid);
     }
 }
