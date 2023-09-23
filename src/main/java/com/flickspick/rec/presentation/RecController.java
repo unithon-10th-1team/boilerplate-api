@@ -16,21 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "추천 데이터 관리")
 @RestController
-// @RequestMapping(path = "/api/v1/rec", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/v1/rec", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class RecController {
     private final RecService recService;
 
-    @Operation(summary = "[MOCK] 질의 기반 추천 데이터 조회")
-    @PostMapping("/api/v1/rec/query")
+    @Operation(summary = "질의 기반 추천 데이터 조회")
+    @PostMapping("/query")
     public ResponseEntity<?> query(AuthUser user, @RequestBody RecRequest request) {
-        var response = recService.get(user, request);
-        return ResponseDto.ok(response);
-    }
-
-    @Operation(summary = "[MOCK] 질의 기반 추천 데이터 조회")
-    @PostMapping("/api/v2/rec/query")
-    public ResponseEntity<?> queryV2(AuthUser user, @RequestBody RecRequest request) {
         var response = recService.getV2(user, request);
         return ResponseDto.ok(response);
     }
