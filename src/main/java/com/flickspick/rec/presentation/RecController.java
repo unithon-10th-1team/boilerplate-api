@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecController {
     private final RecService recService;
 
-    @Operation(summary = "질의 기반 추천 데이터 조회")
+    @Operation(summary = "[MOCK] 질의 기반 추천 데이터 조회")
     @PostMapping("/query")
     public ResponseEntity<?> query(AuthUser user, @RequestBody RecRequest request) {
         var response = recService.get(user, request);
