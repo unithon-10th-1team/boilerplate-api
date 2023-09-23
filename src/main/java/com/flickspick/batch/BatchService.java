@@ -12,7 +12,6 @@ import com.flickspick.movie.domain.Movie;
 import com.flickspick.movie.infrastructure.MovieRepository;
 import com.flickspick.movie_recommendtype.domain.MovieRecommendType;
 import com.flickspick.movie_recommendtype.infrastructure.MovieRecommendTypeRepository;
-import com.flickspick.user_movie_history.domain.MovieResult;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
 import com.flickspick.user_movie_history.infrastructure.UserMovieHistoryRepository;
 import com.flickspick.ott.domain.Ott;

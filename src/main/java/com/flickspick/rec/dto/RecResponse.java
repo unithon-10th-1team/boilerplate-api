@@ -13,4 +13,12 @@ public class RecResponse {
     private RecTypeModel recType;
     private MovieModel movie;
     private List<MovieModel> recMovies;
+
+    public static RecResponse toResponse(RecTypeModel recTypeModel, MovieModel movie, List<MovieModel> recMovies) {
+        return new RecResponse(
+                recTypeModel,
+                movie,
+                recMovies
+        );
+    }
 }

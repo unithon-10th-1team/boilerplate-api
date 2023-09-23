@@ -16,6 +16,17 @@ public enum ErrorType {
     FAIL_TO_LOGIN_ERROR(HttpStatus.UNAUTHORIZED, "로그인을 실패했습니다."),
     AUTHORIZATION_ERROR(HttpStatus.UNAUTHORIZED, "인증, 인가 오류"),
     USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "유저 정보를 찾을 수 없습니다."),
+
+    //rec
+    RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "추천 타입을 찾을 수 없습니다."),
+
+    //movie
+    MOVIE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 정보를 찾을 수 없습니다."),
+
+    //movieRecommendType
+    MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 타입 매핑 정보를 찾을 수 없습니다.");
+
+
     ;
 
     private final HttpStatus status;

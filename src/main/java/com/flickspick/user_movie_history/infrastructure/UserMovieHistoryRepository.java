@@ -8,4 +8,5 @@ import com.flickspick.user_movie_history.domain.UserMovieHistory;
 
 public interface UserMovieHistoryRepository extends JpaRepository<UserMovieHistory, Long> {
 	Optional<UserMovieHistory> findByRecommendTypeIdAndMovieId(Long recommendTypeId, Long movieId);
+
 }

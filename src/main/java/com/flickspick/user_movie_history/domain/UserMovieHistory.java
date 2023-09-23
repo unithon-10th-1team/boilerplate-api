@@ -31,6 +31,8 @@ public class UserMovieHistory extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private Long userId;
+
 	@Convert(converter = MapConverter.class)
 	private Map<Long, Long> questionAndAnswer;
 
@@ -38,10 +40,22 @@ public class UserMovieHistory extends BaseEntity {
 
 	private Long movieId;
 
+	public static UserMovieHistory of(Long userId,  Long recommendTypeId, Long movieId) {
+		return UserMovieHistory.builder()
+				.userId(userId)
+				.recommendTypeId(recommendTypeId)
+				.movieId(movieId)
+				.build();
+	}
+
 	public void addQuestionAndAnswer(Long questionId, Long answerId) {
 		if (questionAndAnswer == null) {
 			questionAndAnswer = new HashMap<>();
 		}
 		questionAndAnswer.put(questionId, answerId);
+	}
+
+	public void updateQuestionAndAnswer(Map<Long, Long> questionAndAnswer) {
+		this.questionAndAnswer = questionAndAnswer;
 	}
 }
