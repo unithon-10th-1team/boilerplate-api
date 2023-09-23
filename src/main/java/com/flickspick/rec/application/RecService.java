@@ -10,6 +10,7 @@ import com.flickspick.rec.dto.RecRequest.QuestionModel;
 import com.flickspick.rec.dto.RecResponse;
 import com.flickspick.recommendtype.application.RecommendTypeService;
 import com.flickspick.recommendtype.model.RecTypeModel;
+import com.flickspick.user.application.UserService;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,12 @@ public class RecService {
     private final RecommendTypeService recommendTypeService;
     private final MovieService movieService;
     private final MovieRecommendTypeRepository movieRecommendTypeRepository;
+    private final UserService userService;
 
     @SneakyThrows
     public RecResponse get(AuthUser user, RecRequest request) {
+        var userModel = userService.getUserModel(user.getId());
+
         Random rand = new SecureRandom();
         Map<Long, Long> questionAndAnswer = request.getAnswers()
                 .stream()
@@ -57,6 +61,6 @@ public class RecService {
 
         userMovieHistoryService.saveUserMovieHistory(userMovieHistory);
 
-        return RecResponse.toResponse(recTypeModel, movieModel, recMovies);
+        return RecResponse.toResponse(recTypeModel, movieModel, recMovies, userModel);
     }
 }
