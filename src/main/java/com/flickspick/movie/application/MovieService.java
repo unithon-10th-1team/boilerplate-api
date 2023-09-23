@@ -20,9 +20,14 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     public MovieModel getMovieModel(Long movieId) {
-        Movie movie = movieRepository.findById(movieId)
+        var movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new MovieNotFoundException(ErrorType.MOVIE_NOT_FOUND_ERROR));
         return MovieModel.toModel(movie);
+    }
+
+    @Async(value = "taskExecutor")
+    public CompletableFuture<MovieModel> asyncGetMovieModel(Long movieId) {
+        return CompletableFuture.completedFuture(getMovieModel(movieId));
     }
 
     public List<MovieModel> getMovieModelList(Long movieId, int count) {
@@ -39,7 +44,7 @@ public class MovieService {
                 .map(MovieModel::toModel)
                 .collect(Collectors.toList());
     }
-
+    
     @Async(value = "taskExecutor")
     public CompletableFuture<List<MovieModel>> asyncGetMovieModelList(Long movieId, int count) {
         return CompletableFuture.completedFuture(getMovieModelList(movieId, count));
