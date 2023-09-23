@@ -20,3 +20,23 @@ CREATE TABLE `ott`
     `modified_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='사용자';
+
+CREATE TABLE `question`
+(
+    `id`          bigint       NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `answers`     varchar(512) NOT NULL COMMENT '응답',
+    `question`    varchar(512) NOT NULL COMMENT '질문',
+    `created_at`  datetime DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
+    `modified_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='질문';
+
+CREATE TABLE `question_answer`
+(
+    `id`          bigint       NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `question_id` int          NOT NULL COMMENT '질문',
+    `answer`      varchar(512) NOT NULL COMMENT '응답',
+    `created_at`  datetime DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
+    `modified_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='질문 응답';
