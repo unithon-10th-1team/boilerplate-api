@@ -1,7 +1,7 @@
 package com.flickspick.rec.dto;
 
 import com.flickspick.movie.model.MovieModel;
-import com.flickspick.rec.model.RecTypeModel;
+import com.flickspick.recommendtype.model.RecTypeModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

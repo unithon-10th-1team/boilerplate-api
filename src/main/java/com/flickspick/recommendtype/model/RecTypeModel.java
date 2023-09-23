@@ -1,4 +1,4 @@
-package com.flickspick.rec.model;
+package com.flickspick.recommendtype.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

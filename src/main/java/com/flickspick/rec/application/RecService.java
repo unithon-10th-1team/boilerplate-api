@@ -4,7 +4,7 @@ import com.flickspick.auth.model.AuthUser;
 import com.flickspick.movie.model.MovieModel;
 import com.flickspick.rec.dto.RecRequest;
 import com.flickspick.rec.dto.RecResponse;
-import com.flickspick.rec.model.RecTypeModel;
+import com.flickspick.recommendtype.model.RecTypeModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

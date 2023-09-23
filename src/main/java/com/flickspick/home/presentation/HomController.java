@@ -1,5 +1,6 @@
 package com.flickspick.home.presentation;
 
+import com.flickspick.auth.model.AuthUser;
 import com.flickspick.common.model.dto.ResponseDto;
 import com.flickspick.home.application.HomeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomController {
     private final HomeService homeService;
 
-    /*@Operation(summary = "홈 데이터 제공")
+    @Operation(summary = "[mock] 홈 데이터 제공")
     @GetMapping
-    public ResponseEntity<?> getHome() {
-        var response = homeService.getHome();
+    public ResponseEntity<?> getHome(AuthUser user) {
+        var response = homeService.getHome(user);
         return ResponseDto.ok(response);
-    }*/
+    }
 }
