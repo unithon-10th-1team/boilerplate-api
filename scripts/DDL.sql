@@ -45,7 +45,8 @@ CREATE TABLE `movie`
 (
     `id`          bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
     `title`       varchar(512) DEFAULT NULL COMMENT '제목',
-    `description` varchar(512) DEFAULT NULL COMMENT '설명',
+    `plot`        text COMMENT '설명',
+    `reason`      text,
     `director`    varchar(512) DEFAULT NULL COMMENT '감독',
     `producer`    varchar(512) DEFAULT NULL COMMENT '제작',
     `scenario`    varchar(512) DEFAULT NULL COMMENT '각본',
@@ -54,4 +55,4 @@ CREATE TABLE `movie`
     `created_at`  datetime     DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
     `modified_at` datetime     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='영화';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='영화';

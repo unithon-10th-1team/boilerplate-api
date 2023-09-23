@@ -27,7 +27,9 @@ public class Movie extends BaseEntity {
 
     private String title;
 
-    private String description;
+    private String plot;
+
+    private String reason;
 
     private String director;
 
