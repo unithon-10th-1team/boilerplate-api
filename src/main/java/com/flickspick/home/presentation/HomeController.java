@@ -26,7 +26,7 @@ public class HomeController {
         return ResponseDto.ok(response);
     }
 
-    @Operation(summary = "[mock] 마이페이지")
+    @Operation(summary = "마이페이지")
     @GetMapping(path = "/api/v1/me")
     public ResponseEntity<?> getMyProfile(AuthUser user) {
         var response = homeService.getMyProfile(user);

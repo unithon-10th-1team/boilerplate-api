@@ -17,4 +17,8 @@ public class MyProfileResponse {
     private List<RecTypeModel> recType;
     private List<String> tags;
     private List<MovieModel> similarMovies;
+
+    public static MyProfileResponse toResponse(UserModel user, List<OttModel> otts, List<RecTypeModel> recType, List<String> tags, List<MovieModel> similarMovies) {
+        return new MyProfileResponse(user, otts, recType, tags, similarMovies);
+    }
 }

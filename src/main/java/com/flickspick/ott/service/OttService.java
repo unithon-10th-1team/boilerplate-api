@@ -1,6 +1,8 @@
 package com.flickspick.ott.service;
 
 import com.flickspick.auth.model.AuthUser;
+import com.flickspick.exception.dto.ErrorType;
+import com.flickspick.exception.ott.OttNotFoundException;
 import com.flickspick.ott.domain.Ott;
 import com.flickspick.ott.domain.OttUser;
 import com.flickspick.ott.dto.OttRequest;
@@ -48,5 +50,10 @@ public class OttService {
 
     public List<OttUser> findAllByUid(Long uid) {
         return ottUserRepository.findAllByUid(uid);
+    }
+
+    public Ott findById(Long ottId) {
+        return ottRepository.findById(ottId)
+                .orElseThrow(() -> new OttNotFoundException(ErrorType.OTT_NOT_FOUND_ERROR));
     }
 }

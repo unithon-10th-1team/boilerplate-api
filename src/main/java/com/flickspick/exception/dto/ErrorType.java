@@ -29,6 +29,9 @@ public enum ErrorType {
     //userMovieHistory
     USER_MOVIE_HISTORY_NOT_FOUND(HttpStatus.NOT_FOUND, "유저 영화 히스토리를 찾을 수 없습니다."),
 
+    //ott
+    OTT_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "OTT 정보를 찾을 수 없습니다."),
+
 
     ;
 
