@@ -78,6 +78,6 @@ public class ChatGPTClientImpl implements ChatGPTClient {
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.bodyToMono(ChatGPTQueryResponse.class).block();
-		return queryResponse.getChoices().get(0).getResponseMessage();
+		return queryResponse.getChoices().get(0).getMessage();
 	}
 }
