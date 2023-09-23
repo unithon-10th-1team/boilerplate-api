@@ -41,8 +41,11 @@ public class UserService {
     }
 
     public UserResponse get(AuthUser authUser, Long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+        var user =
+                userRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
 
         return UserResponse.from(user);
     }

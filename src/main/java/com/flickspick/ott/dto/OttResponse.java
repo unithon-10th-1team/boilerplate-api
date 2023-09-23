@@ -19,7 +19,6 @@ public class OttResponse {
                 ott.getName(),
                 ott.getNameEng(),
                 ott.getDescription(),
-                ott.getImageUrl()
-        );
+                ott.getImageUrl());
     }
 }
