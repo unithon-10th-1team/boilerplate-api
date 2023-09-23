@@ -10,18 +10,49 @@ import com.flickspick.ott.dto.OttResponse;
 import com.flickspick.ott.dto.OttsResponse;
 import com.flickspick.ott.infrastructure.OttRepository;
 import com.flickspick.ott.infrastructure.OttUserRepository;
+import com.flickspick.ott.model.OttModel;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OttService {
     private final OttRepository ottRepository;
     private final OttUserRepository ottUserRepository;
+    private Map<Long, OttModel> otts;
+
+    @Scheduled(fixedRate = 1000 * 60 * 5, initialDelayString = "0")
+    public void refreshOtts() {
+        log.info("refresh recTypeModels info start");
+        otts = refresh();
+        log.info("refresh recTypeModels info complete");
+    }
+
+    public Map<Long, OttModel> refresh() {
+        return ottRepository.findAll()
+                .stream()
+                .map(OttModel::toModel)
+                .collect(Collectors.toMap(OttModel::getId, Function.identity()));
+    }
+
+    public OttModel get(Long id) {
+        var ott = otts.get(id);
+
+        if (ott == null) {
+            throw new OttNotFoundException(ErrorType.OTT_NOT_FOUND_ERROR);
+        }
+
+        return ott;
+    }
 
     public OttsResponse getAll() {
         var otts =
