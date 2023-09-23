@@ -4,6 +4,7 @@ import com.flickspick.exception.dto.ErrorType;
 import com.flickspick.exception.movie.MovieNotFoundException;
 import com.flickspick.exception.rec.RecommendTypeNotFoundException;
 import com.flickspick.movie.domain.Movie;
+import com.flickspick.movie.dto.MovieResponse;
 import com.flickspick.movie.infrastructure.MovieRepository;
 import com.flickspick.movie.model.MovieModel;
 import com.flickspick.recommendtype.model.RecTypeModel;
@@ -68,5 +69,11 @@ public class MovieService {
 
     public Long getMovieCount() {
         return movieRepository.count();
+    }
+
+    public MovieResponse getMovie(Long movieId) {
+        var movieModel = get(movieId);
+        var recMovies = getList(movieId, 3);
+        return MovieResponse.toResponse(movieModel, recMovies);
     }
 }
