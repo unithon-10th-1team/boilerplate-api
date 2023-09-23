@@ -40,3 +40,18 @@ CREATE TABLE `question_answer`
     `modified_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='질문 응답';
+
+CREATE TABLE `movie`
+(
+    `id`          bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `title`       varchar(512) DEFAULT NULL COMMENT '제목',
+    `description` varchar(512) DEFAULT NULL COMMENT '설명',
+    `director`    varchar(512) DEFAULT NULL COMMENT '감독',
+    `producer`    varchar(512) DEFAULT NULL COMMENT '제작',
+    `scenario`    varchar(512) DEFAULT NULL COMMENT '각본',
+    `grade`       int          DEFAULT NULL COMMENT '평점',
+    `image_url`   varchar(512) DEFAULT NULL COMMENT '이미지',
+    `created_at`  datetime     DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
+    `modified_at` datetime     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='영화';
