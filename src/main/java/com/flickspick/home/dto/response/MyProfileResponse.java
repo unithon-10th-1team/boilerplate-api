@@ -11,11 +11,10 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class HomeResponse {
+public class MyProfileResponse {
     private UserModel user;
     private List<OttModel> otts;
     private List<RecTypeModel> recType;
     private List<String> tags;
     private List<MovieModel> similarMovies;
-    private List<MovieModel> differentMovies;
 }

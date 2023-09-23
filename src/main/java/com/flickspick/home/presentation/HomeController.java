@@ -14,15 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "홈")
 @RestController
-@RequestMapping(path = "/api/v1/home", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class HomController {
+public class HomeController {
     private final HomeService homeService;
 
-    @Operation(summary = "[mock] 홈 데이터 제공")
-    @GetMapping
+    @Operation(summary = "[mock] 홈페이지")
+    @GetMapping(path = "/api/v1/home")
     public ResponseEntity<?> getHome(AuthUser user) {
         var response = homeService.getHome(user);
+        return ResponseDto.ok(response);
+    }
+
+    @Operation(summary = "[mock] 마이페이지")
+    @GetMapping(path = "/api/v1/me")
+    public ResponseEntity<?> getMyProfile(AuthUser user) {
+        var response = homeService.getMyProfile(user);
         return ResponseDto.ok(response);
     }
 }
