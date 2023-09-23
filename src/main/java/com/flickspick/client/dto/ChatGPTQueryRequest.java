@@ -2,7 +2,7 @@ package com.flickspick.client.dto;
 
 import java.util.List;
 
-import com.flickspick.ott.domain.Ott;
+import org.apache.coyote.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +11,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ChatGPTQueryRequest {
     private String model;
-    private List<Message> messages;
+    private List<RequestMessage> responseMessages;
 }

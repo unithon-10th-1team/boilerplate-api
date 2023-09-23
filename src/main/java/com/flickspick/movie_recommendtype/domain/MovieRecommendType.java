@@ -28,5 +28,5 @@ public class MovieRecommendType extends BaseEntity {
 
 	private Long movieId;
 
-	private Long characterId;
+	private Long recommendTypeId;
 }

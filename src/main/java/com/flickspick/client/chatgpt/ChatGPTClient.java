@@ -1,7 +1,10 @@
 package com.flickspick.client.chatgpt;
 
-import com.flickspick.client.dto.ChatGPTQueryResponse;
+import java.util.List;
+
+import com.flickspick.client.dto.ResponseMessage;
+import com.flickspick.rec.dto.RecRequest;
 
 public interface ChatGPTClient {
-	ChatGPTQueryResponse query();
+	ResponseMessage query(List<RecRequest.QuestionModel> answers, List<Long> ottIds);
 }

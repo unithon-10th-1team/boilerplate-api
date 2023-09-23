@@ -39,6 +39,8 @@ public class Movie extends BaseEntity {
 
     private Integer grade;
 
+    private Long recommendTypeId;
+
     @Column(name = "image_url")
     private String imageUrl;
 

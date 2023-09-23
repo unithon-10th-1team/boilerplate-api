@@ -1,5 +1,6 @@
 package com.flickspick.movie_result.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Convert;
@@ -34,7 +35,14 @@ public class MovieResult extends BaseEntity {
 	@Convert(converter = MapConverter.class)
 	private Map<Long, Long> questionAndAnswer;
 
-	private Long typeId;
+	private Long recommendTypeId;
 
 	private Long movieId;
+
+	public void addQuestionAndAnswer(Long questionId, Long answerId) {
+		if (questionAndAnswer == null) {
+			questionAndAnswer = new HashMap<>();
+		}
+		questionAndAnswer.put(questionId, answerId);
+	}
 }

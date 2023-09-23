@@ -6,14 +6,14 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class MapConverter implements AttributeConverter<Map<String, Object>, String> {
+public class MapConverter implements AttributeConverter<Map<Long, Long>, String> {
     @Override
-    public String convertToDatabaseColumn(Map<String, Object> attribute) {
+    public String convertToDatabaseColumn(Map<Long, Long> attribute) {
         return MapperUtil.writeValueAsString(attribute);
     }
 
     @Override
-    public Map<String, Object> convertToEntityAttribute(String dbData) {
+    public Map<Long, Long> convertToEntityAttribute(String dbData) {
         return MapperUtil.readValue(dbData, Map.class);
     }
 }

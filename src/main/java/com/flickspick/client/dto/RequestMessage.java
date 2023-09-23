@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatGPTChoice {
-	private Integer index;
-	private ResponseMessage responseMessage;
-	private String finish_reason;
+public class RequestMessage {
+	private String role;
+	private String content;
 }

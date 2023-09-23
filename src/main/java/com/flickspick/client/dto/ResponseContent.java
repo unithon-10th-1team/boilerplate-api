@@ -1,5 +1,6 @@
 package com.flickspick.client.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatGPTChoice {
-	private Integer index;
-	private ResponseMessage responseMessage;
-	private String finish_reason;
+public class ResponseContent {
+	private String title;
+	private String reason;
+	private String plot;
+	private String recommend_type;
 }
