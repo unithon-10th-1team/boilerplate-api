@@ -9,6 +9,7 @@ import com.flickspick.user.dto.request.UserSignRequest;
 import com.flickspick.user.dto.response.UserResponse;
 import com.flickspick.user.dto.response.UserSignResponse;
 import com.flickspick.user.infrastructure.UserRepository;
+import com.flickspick.user.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,5 +49,12 @@ public class UserService {
                                 () -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
 
         return UserResponse.from(user);
+    }
+
+    public UserModel getUserModel(Long id) {
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+
+        return UserModel.from(user);
     }
 }

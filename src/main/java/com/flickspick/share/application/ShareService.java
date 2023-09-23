@@ -1,13 +1,10 @@
 package com.flickspick.share.application;
 
 import com.flickspick.auth.model.AuthUser;
-import com.flickspick.exception.dto.ErrorType;
-import com.flickspick.exception.user.UserNotFoundException;
 import com.flickspick.movie.model.MovieModel;
 import com.flickspick.recommendtype.model.RecTypeModel;
 import com.flickspick.share.dto.response.ShareResponse;
-import com.flickspick.user.infrastructure.UserRepository;
-import com.flickspick.user.model.UserModel;
+import com.flickspick.user.application.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +13,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ShareService {
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     public ShareResponse share(AuthUser authUser) {
-        var user = userRepository.findById(authUser.getId())
-                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+        var user = userService.getUserModel(authUser.getId());
 
         return new ShareResponse(
-                UserModel.from(user),
+                user,
                 List.of(
                         new RecTypeModel(
                                 1L,
