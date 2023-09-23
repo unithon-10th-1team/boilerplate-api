@@ -7,3 +7,5 @@ spring:
     hikari:
       minimum-idle: 10
       maximum-pool-size: 20
+chatgpt:
+  api-key: ${CHATGPT_API_KEY:default}
