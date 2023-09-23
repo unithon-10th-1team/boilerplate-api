@@ -5,8 +5,11 @@ import com.flickspick.exception.user_movie_history.UserMovieHistoryNotFoundExcep
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
 import com.flickspick.user_movie_history.infrastructure.UserMovieHistoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +30,10 @@ public class UserMovieHistoryService {
         }
 
         return userMovieHistory.get();
+    }
+
+    @Async
+    public CompletableFuture<UserMovieHistory> asyncGetRecentHistory(Long userId) {
+        return CompletableFuture.completedFuture(getRecentHistory(userId));
     }
 }

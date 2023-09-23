@@ -11,8 +11,11 @@ import com.flickspick.user.dto.response.UserSignResponse;
 import com.flickspick.user.infrastructure.UserRepository;
 import com.flickspick.user.model.UserModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +59,10 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
 
         return UserModel.from(user);
+    }
+
+    @Async(value = "taskExecutor")
+    public CompletableFuture<UserModel> asyncGetUserModel(Long id) {
+        return CompletableFuture.completedFuture(getUserModel(id));
     }
 }
