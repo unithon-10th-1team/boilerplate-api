@@ -41,4 +41,8 @@ public class Movie extends BaseEntity {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    public String people() {
+        return "감독 " + director + " | 각본 " + scenario + " | 제작 " + producer;
+    }
 }
