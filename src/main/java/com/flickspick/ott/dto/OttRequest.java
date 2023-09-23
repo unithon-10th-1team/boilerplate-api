@@ -1,10 +1,9 @@
 package com.flickspick.ott.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @Data
 @RequiredArgsConstructor

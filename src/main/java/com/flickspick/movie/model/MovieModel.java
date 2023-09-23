@@ -29,7 +29,6 @@ public class MovieModel {
                 movie.getProducer(),
                 movie.getScenario(),
                 movie.getGrade(),
-                movie.getImageUrl()
-        );
+                movie.getImageUrl());
     }
 }

@@ -4,7 +4,7 @@ import com.flickspick.exception.BusinessException;
 import com.flickspick.exception.dto.ErrorType;
 
 public class UserMovieHistoryNotFoundException extends BusinessException {
-	public UserMovieHistoryNotFoundException(ErrorType errorType) {
-		super(errorType);
-	}
+    public UserMovieHistoryNotFoundException(ErrorType errorType) {
+        super(errorType);
+    }
 }

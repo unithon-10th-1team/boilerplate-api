@@ -2,26 +2,18 @@ package com.flickspick.movie.application;
 
 import com.flickspick.exception.dto.ErrorType;
 import com.flickspick.exception.movie.MovieNotFoundException;
-import com.flickspick.exception.rec.RecommendTypeNotFoundException;
-import com.flickspick.movie.domain.Movie;
 import com.flickspick.movie.dto.MovieResponse;
 import com.flickspick.movie.infrastructure.MovieRepository;
 import com.flickspick.movie.model.MovieModel;
-import com.flickspick.recommendtype.model.RecTypeModel;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -38,8 +30,7 @@ public class MovieService {
     }
 
     public Map<Long, MovieModel> refresh() {
-        return movieRepository.findAll()
-                .stream()
+        return movieRepository.findAll().stream()
                 .map(MovieModel::toModel)
                 .collect(Collectors.toMap(MovieModel::getId, Function.identity()));
     }
@@ -55,10 +46,11 @@ public class MovieService {
     }
 
     public List<MovieModel> getList(Long movieId, int count) {
-        List<MovieModel> movieList = movieModels.keySet()
-                .stream().map(movieModels::get)
-                .filter(movieModel -> movieModel.getId() != movieId)
-                .collect(Collectors.toList());
+        List<MovieModel> movieList =
+                movieModels.keySet().stream()
+                        .map(movieModels::get)
+                        .filter(movieModel -> movieModel.getId() != movieId)
+                        .collect(Collectors.toList());
 
         Collections.shuffle(movieList);
 

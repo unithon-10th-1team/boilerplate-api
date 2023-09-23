@@ -1,8 +1,6 @@
 package com.flickspick.client.dto;
 
 import java.util.List;
-
-import com.flickspick.ott.domain.Ott;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

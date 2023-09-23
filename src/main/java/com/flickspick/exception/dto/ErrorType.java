@@ -17,22 +17,20 @@ public enum ErrorType {
     AUTHORIZATION_ERROR(HttpStatus.UNAUTHORIZED, "인증, 인가 오류"),
     USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "유저 정보를 찾을 수 없습니다."),
 
-    //rec
+    // rec
     RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "추천 타입을 찾을 수 없습니다."),
 
-    //movie
+    // movie
     MOVIE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 정보를 찾을 수 없습니다."),
 
-    //movieRecommendType
+    // movieRecommendType
     MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "영화 타입 매핑 정보를 찾을 수 없습니다."),
 
-    //userMovieHistory
+    // userMovieHistory
     USER_MOVIE_HISTORY_NOT_FOUND(HttpStatus.NOT_FOUND, "유저 영화 히스토리를 찾을 수 없습니다."),
 
-    //ott
+    // ott
     OTT_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "OTT 정보를 찾을 수 없습니다."),
-
-
     ;
 
     private final HttpStatus status;

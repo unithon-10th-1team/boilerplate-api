@@ -11,16 +11,15 @@ import com.flickspick.ott.dto.OttsResponse;
 import com.flickspick.ott.infrastructure.OttRepository;
 import com.flickspick.ott.infrastructure.OttUserRepository;
 import com.flickspick.ott.model.OttModel;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -38,8 +37,7 @@ public class OttService {
     }
 
     public Map<Long, OttModel> refresh() {
-        return ottRepository.findAll()
-                .stream()
+        return ottRepository.findAll().stream()
                 .map(OttModel::toModel)
                 .collect(Collectors.toMap(OttModel::getId, Function.identity()));
     }
@@ -72,11 +70,7 @@ public class OttService {
     @Transactional
     public OttUser saveOttUser(AuthUser user, Ott ott) {
         return ottUserRepository.save(
-                OttUser.builder()
-                        .uid(user.getId())
-                        .ottId(ott.getId())
-                        .build()
-        );
+                OttUser.builder().uid(user.getId()).ottId(ott.getId()).build());
     }
 
     public List<OttUser> findAllByUid(Long uid) {
@@ -84,7 +78,8 @@ public class OttService {
     }
 
     public Ott findById(Long ottId) {
-        return ottRepository.findById(ottId)
+        return ottRepository
+                .findById(ottId)
                 .orElseThrow(() -> new OttNotFoundException(ErrorType.OTT_NOT_FOUND_ERROR));
     }
 }

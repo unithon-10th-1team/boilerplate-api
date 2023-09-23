@@ -16,11 +16,10 @@ import com.flickspick.user.infrastructure.UserRepository;
 import com.flickspick.user.model.UserModel;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -33,11 +32,15 @@ public class HomeService {
     private final UserService userService;
 
     public MyHomeResponse getHome(AuthUser authUser) {
-        var user = userRepository.findById(authUser.getId())
-                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+        var user =
+                userRepository
+                        .findById(authUser.getId())
+                        .orElseThrow(
+                                () -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
         UserModel userModel = UserModel.from(user);
         UserMovieHistory userMovieHistory = userMovieHistoryService.getRecentHistory(user.getId());
-        RecTypeModel recTypeModel = recommendTypeService.getRecTypeModel(userMovieHistory.getRecommendTypeId());
+        RecTypeModel recTypeModel =
+                recommendTypeService.getRecTypeModel(userMovieHistory.getRecommendTypeId());
 
         List<String> tags = recTypeModel.getTags();
 
@@ -47,13 +50,15 @@ public class HomeService {
 
         List<MovieModel> differentMovies = movieService.getList(userMovieHistory.getMovieId(), 3);
 
-        return MyHomeResponse.toResponse(userModel, List.of(recTypeModel), tags, similarMovies, differentMovies);
+        return MyHomeResponse.toResponse(
+                userModel, List.of(recTypeModel), tags, similarMovies, differentMovies);
     }
 
     public MyProfileResponse getMyProfile(AuthUser authUser) {
         var userModel = userService.getUserModel(authUser.getId());
 
-        UserMovieHistory userMovieHistory = userMovieHistoryService.getRecentHistory(userModel.getId());
+        UserMovieHistory userMovieHistory =
+                userMovieHistoryService.getRecentHistory(userModel.getId());
         RecTypeModel recTypeModel = recommendTypeService.get(userMovieHistory.getRecommendTypeId());
 
         List<String> tags = recTypeModel.getTags();
@@ -62,10 +67,11 @@ public class HomeService {
         MovieModel movieModel = movieService.get(userMovieHistory.getMovieId());
         similarMovies.add(movieModel);
 
-        List<OttModel> ottModelList = ottService.findAllByUid(userModel.getId())
-                .stream()
-                .map(ottUser -> ottService.get(ottUser.getOttId()))
-                .collect(Collectors.toList());
-        return MyProfileResponse.toResponse(userModel, ottModelList, List.of(recTypeModel), tags, similarMovies);
+        List<OttModel> ottModelList =
+                ottService.findAllByUid(userModel.getId()).stream()
+                        .map(ottUser -> ottService.get(ottUser.getOttId()))
+                        .collect(Collectors.toList());
+        return MyProfileResponse.toResponse(
+                userModel, ottModelList, List.of(recTypeModel), tags, similarMovies);
     }
 }

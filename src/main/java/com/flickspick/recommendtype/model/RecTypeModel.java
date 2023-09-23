@@ -1,11 +1,9 @@
 package com.flickspick.recommendtype.model;
 
+import com.flickspick.recommendtype.domain.RecommendType;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
-
-import com.flickspick.recommendtype.domain.RecommendType;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +18,6 @@ public class RecTypeModel {
                 recommendType.getId(),
                 recommendType.getRecommendType(),
                 recommendType.getTags(),
-                recommendType.getImageUrl()
-        );
+                recommendType.getImageUrl());
     }
 }

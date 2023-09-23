@@ -6,10 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ChatGPTRole {
-	SYSTEM("system"),
-	USER("user"),
-	ASSISTANT("assistant")
-	;
+    SYSTEM("system"),
+    USER("user"),
+    ASSISTANT("assistant");
 
-	private String value;
+    private String value;
 }

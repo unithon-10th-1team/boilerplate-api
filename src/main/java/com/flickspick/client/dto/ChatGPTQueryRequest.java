@@ -1,9 +1,6 @@
 package com.flickspick.client.dto;
 
 import java.util.List;
-
-import org.apache.coyote.Request;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

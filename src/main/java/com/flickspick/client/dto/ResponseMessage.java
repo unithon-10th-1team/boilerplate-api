@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseMessage {
-	private String role;
-	private ResponseContent content;
+    private String role;
+    private ResponseContent content;
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatGPTChoice {
-	private Integer index;
-	private ResponseMessage message;
-	private String finish_reason;
+    private Integer index;
+    private ResponseMessage message;
+    private String finish_reason;
 }

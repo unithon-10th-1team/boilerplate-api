@@ -12,10 +12,6 @@ public class UserModel {
     private String nickname;
 
     public static UserModel from(User user) {
-        return new UserModel(
-                user.getId(),
-                user.getUsername(),
-                user.getNickname()
-        );
+        return new UserModel(user.getId(), user.getUsername(), user.getNickname());
     }
 }

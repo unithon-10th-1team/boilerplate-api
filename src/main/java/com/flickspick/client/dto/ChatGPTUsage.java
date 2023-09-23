@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatGPTUsage {
-	private Integer prompt_tokens;
-	private Integer completion_tokens;
-	private Integer total_tokens;
+    private Integer prompt_tokens;
+    private Integer completion_tokens;
+    private Integer total_tokens;
 }

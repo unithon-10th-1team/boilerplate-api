@@ -13,15 +13,13 @@ import com.flickspick.recommendtype.model.RecTypeModel;
 import com.flickspick.user.application.UserService;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springframework.stereotype.Service;
-
 import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -37,21 +35,26 @@ public class RecService {
         var userModel = userService.getUserModel(user.getId());
 
         Random rand = new SecureRandom();
-        Map<Long, Long> questionAndAnswer = request.getAnswers()
-                .stream()
-                .collect(
-                        Collectors.toMap(
-                                QuestionModel::getAnswerId,
-                                QuestionModel::getQuestionId,
-                                (a, b) -> b)
-                );
+        Map<Long, Long> questionAndAnswer =
+                request.getAnswers().stream()
+                        .collect(
+                                Collectors.toMap(
+                                        QuestionModel::getAnswerId,
+                                        QuestionModel::getQuestionId,
+                                        (a, b) -> b));
 
         Long movieId = (Math.abs(rand.nextLong()) % movieService.getMovieCount()) + 1;
-        Long recommendTypeId = movieRecommendTypeRepository.findByMovieId(movieId)
-                .orElseThrow(() -> new MovieRecommendTypeNotFoundException(ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
-                .getRecommendTypeId();
+        Long recommendTypeId =
+                movieRecommendTypeRepository
+                        .findByMovieId(movieId)
+                        .orElseThrow(
+                                () ->
+                                        new MovieRecommendTypeNotFoundException(
+                                                ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
+                        .getRecommendTypeId();
 
-        UserMovieHistory userMovieHistory = UserMovieHistory.of(user.getId(), recommendTypeId, movieId);
+        UserMovieHistory userMovieHistory =
+                UserMovieHistory.of(user.getId(), recommendTypeId, movieId);
         userMovieHistory.updateQuestionAndAnswer(questionAndAnswer);
 
         RecTypeModel recTypeModel = recommendTypeService.get(recommendTypeId);

@@ -32,10 +32,7 @@ public class OttController {
 
     @Operation(summary = "Ott 정보 기록")
     @PostMapping
-    public ResponseEntity<?> create(
-            AuthUser user,
-            @RequestBody OttRequest request
-    ) {
+    public ResponseEntity<?> create(AuthUser user, @RequestBody OttRequest request) {
         ottService.create(user, request);
         return ResponseDto.noContent();
     }

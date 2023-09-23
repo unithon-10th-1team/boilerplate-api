@@ -8,12 +8,11 @@ import com.flickspick.recommendtype.model.RecTypeModel;
 import com.flickspick.share.dto.response.ShareResponse;
 import com.flickspick.user.application.UserService;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -32,17 +31,14 @@ public class ShareService {
 
         var userMovieHistory = userMovieHistoryCf.get();
 
-        RecTypeModel recTypeModel = recommendTypeService.getRecTypeModel(userMovieHistory.getRecommendTypeId());
+        RecTypeModel recTypeModel =
+                recommendTypeService.getRecTypeModel(userMovieHistory.getRecommendTypeId());
 
         List<MovieModel> similarMovies = movieService.getList(userMovieHistory.getMovieId(), 2);
         MovieModel movieModel = movieService.get(userMovieHistory.getMovieId());
         similarMovies.add(movieModel);
 
         return new ShareResponse(
-                userCf.get(),
-                List.of(recTypeModel),
-                recTypeModel.getTags(),
-                similarMovies
-        );
+                userCf.get(), List.of(recTypeModel), recTypeModel.getTags(), similarMovies);
     }
 }

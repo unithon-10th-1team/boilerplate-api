@@ -10,12 +10,11 @@ import com.flickspick.user.dto.response.UserResponse;
 import com.flickspick.user.dto.response.UserSignResponse;
 import com.flickspick.user.infrastructure.UserRepository;
 import com.flickspick.user.model.UserModel;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -55,8 +54,11 @@ public class UserService {
     }
 
     public UserModel getUserModel(Long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+        var user =
+                userRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
 
         return UserModel.from(user);
     }
