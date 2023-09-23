@@ -1,7 +1,6 @@
 package com.flickspick.movie.model;
 
 import com.flickspick.movie.domain.Movie;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,8 +22,8 @@ public class MovieModel {
         return new MovieModel(
                 movie.getId(),
                 movie.getTitle(),
-                movie.getReason(),
                 movie.getPlot(),
+                movie.getReason(),
                 movie.getPeople(),
                 movie.getDirector(),
                 movie.getProducer(),
