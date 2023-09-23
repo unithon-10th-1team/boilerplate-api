@@ -44,6 +44,10 @@ public class RecService {
                                         (a, b) -> b));
 
         Long movieId = (Math.abs(rand.nextLong()) % movieService.getMovieCount()) + 1;
+
+
+
+
         Long recommendTypeId =
                 movieRecommendTypeRepository
                         .findByMovieId(movieId)
