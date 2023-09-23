@@ -1,10 +1,12 @@
 package com.flickspick.user.application;
 
-import com.flickspick.auth.application.TokenService;
+import com.flickspick.auth.model.AuthUser;
 import com.flickspick.exception.dto.ErrorType;
+import com.flickspick.exception.user.UserNotFoundException;
 import com.flickspick.exception.user.UserSignInvalidException;
 import com.flickspick.user.domain.User;
 import com.flickspick.user.dto.request.UserSignRequest;
+import com.flickspick.user.dto.response.UserResponse;
 import com.flickspick.user.dto.response.UserSignResponse;
 import com.flickspick.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final TokenService tokenService;
 
     @Transactional
     public UserSignResponse sign(UserSignRequest request) {
@@ -37,5 +38,12 @@ public class UserService {
         var savedUser = userRepository.save(user);
 
         return new UserSignResponse(savedUser.getId(), savedUser.getNickname());
+    }
+
+    public UserResponse get(AuthUser authUser, Long id) {
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(ErrorType.USER_NOT_FOUND_ERROR));
+
+        return UserResponse.from(user);
     }
 }
