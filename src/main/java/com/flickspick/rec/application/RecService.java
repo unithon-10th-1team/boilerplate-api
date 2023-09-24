@@ -13,13 +13,13 @@ import com.flickspick.recommendtype.model.RecTypeModel;
 import com.flickspick.user.application.UserService;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
-import java.security.SecureRandom;
-import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +34,6 @@ public class RecService {
     public RecResponse get(AuthUser user, RecRequest request) {
         var userModel = userService.getUserModel(user.getId());
 
-        Random rand = new SecureRandom();
         Map<Long, Long> questionAndAnswer =
                 request.getAnswers().stream()
                         .collect(
@@ -43,19 +42,15 @@ public class RecService {
                                         QuestionModel::getQuestionId,
                                         (a, b) -> b));
 
-        Long movieId = (Math.abs(rand.nextLong()) % movieService.getMovieCount()) + 1;
+        Long movieId = (long) (new Random().nextInt(65 - 30 + 1) + 30);
 
-
-
-
-        Long recommendTypeId =
-                movieRecommendTypeRepository
-                        .findByMovieId(movieId)
-                        .orElseThrow(
-                                () ->
-                                        new MovieRecommendTypeNotFoundException(
-                                                ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
-                        .getRecommendTypeId();
+        Long recommendTypeId = movieRecommendTypeRepository
+                .findByMovieId(movieId)
+                .orElseThrow(
+                        () ->
+                                new MovieRecommendTypeNotFoundException(
+                                        ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
+                .getRecommendTypeId();
 
         UserMovieHistory userMovieHistory =
                 UserMovieHistory.of(user.getId(), recommendTypeId, movieId);
