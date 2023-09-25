@@ -28,7 +28,8 @@ public class ThemoviedbClient {
     public TheMovieDBTrendModel getTrendMovies(int list) {
         return webClient
                 .get()
-                .uri("/3/discover/movie?include_adult=false&include_video=false&language=ko&page=1&sort_by=popularity.desc&with_genres=10749%7C18%7C10751%7C99%7C36%7C27")
+                .uri(
+                        "/3/discover/movie?include_adult=false&include_video=false&language=ko&page=1&sort_by=popularity.desc&with_genres=10749%7C18%7C10751%7C99%7C36%7C27")
                 .header("Authorization", "Bearer " + apiKey)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()

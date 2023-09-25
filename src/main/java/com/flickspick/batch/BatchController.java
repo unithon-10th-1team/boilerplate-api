@@ -5,13 +5,12 @@ import com.flickspick.client.themoviedb.ThemoviedbClient;
 import com.flickspick.movie.domain.Movie;
 import com.flickspick.movie.infrastructure.MovieRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.stream.Collectors;
 
 @Tag(name = "배치 서비스")
 @RestController
@@ -30,14 +29,18 @@ public class BatchController {
 
     @PostMapping("/test")
     public void testBatch() {
-        var movie = themoviedbClient.getTrendMovies(4).getResults()
-                .stream()
-                .map(m -> Movie.builder()
-                        .title(m.getTitle())
-                        .plot(m.getOverview())
-                        .imageUrl("https://image.tmdb.org/t/p/w780/" + m.getPoster_path())
-                        .build()
-                ).collect(Collectors.toList());
+        var movie =
+                themoviedbClient.getTrendMovies(4).getResults().stream()
+                        .map(
+                                m ->
+                                        Movie.builder()
+                                                .title(m.getTitle())
+                                                .plot(m.getOverview())
+                                                .imageUrl(
+                                                        "https://image.tmdb.org/t/p/w780/"
+                                                                + m.getPoster_path())
+                                                .build())
+                        .collect(Collectors.toList());
 
         movieRepository.saveAll(movie);
     }

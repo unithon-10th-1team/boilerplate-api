@@ -13,13 +13,12 @@ import com.flickspick.recommendtype.model.RecTypeModel;
 import com.flickspick.user.application.UserService;
 import com.flickspick.user_movie_history.application.UserMovieHistoryService;
 import com.flickspick.user_movie_history.domain.UserMovieHistory;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springframework.stereotype.Service;
-
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -44,13 +43,14 @@ public class RecService {
 
         Long movieId = (long) (new Random().nextInt(65 - 30 + 1) + 30);
 
-        Long recommendTypeId = movieRecommendTypeRepository
-                .findByMovieId(movieId)
-                .orElseThrow(
-                        () ->
-                                new MovieRecommendTypeNotFoundException(
-                                        ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
-                .getRecommendTypeId();
+        Long recommendTypeId =
+                movieRecommendTypeRepository
+                        .findByMovieId(movieId)
+                        .orElseThrow(
+                                () ->
+                                        new MovieRecommendTypeNotFoundException(
+                                                ErrorType.MOVIE_RECOMMEND_TYPE_NOT_FOUND_ERROR))
+                        .getRecommendTypeId();
 
         UserMovieHistory userMovieHistory =
                 UserMovieHistory.of(user.getId(), recommendTypeId, movieId);
